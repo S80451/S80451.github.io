@@ -54,16 +54,17 @@
             border: 1px solid var(--color-mid-grey);
             border-radius: var(--border-radius);
             padding: var(--padding);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.2s ease-in-out; /* Smooth hover transition */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             overflow: hidden;
         }
 
+        /* Theme Tweak 3: Subtle zoom/scale on hover */
         .bento-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+            transform: scale(1.01); /* Subtle 1% zoom */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
         }
 
         /* Card Headings and Typography */
@@ -78,7 +79,7 @@
 
         .card-title {
             font-size: 1.5rem;
-            font-weight: 700; /* Made title bolder for emphasis */
+            font-weight: 700; 
             margin-bottom: 8px;
         }
         
@@ -103,6 +104,12 @@
         .small-title {
             font-size: 1.25rem;
             font-weight: 600;
+        }
+        
+        /* Utility for the reflection card */
+        .large-text-content {
+            font-size: 1.05rem;
+            line-height: 1.5;
         }
 
         /* Social Links Styling */
@@ -130,22 +137,44 @@
         .card-profile {
             grid-column: span 2;
             grid-row: span 2;
+            
+            /* ---- BACKGROUND IMAGE STYLES RE-APPLIED ---- */
+            /* NOTE: This assumes 'bg.jpg' is in the same directory */
+            background-image: url('bg.jpg'); 
+            background-size: cover;          
+            background-position: center;     
+            background-repeat: no-repeat;    
+            background-blend-mode: multiply; 
+            background-color: rgba(0, 0, 0, 0.35); /* Increased opacity for better text contrast */
+            color: var(--color-white); /* Main text color set to white */
+            /* -------------------------------- */
         }
+        
+        /* Profile Card Text Overrides for Readability */
+        .card-profile .card-header {
+            color: var(--color-light-grey); 
+        }
+
+        .card-profile .social-links a {
+            color: var(--color-light-grey);
+        }
+        .card-profile .social-links a:hover {
+            color: #00bcd4; /* A slight blue/cyan hover accent for contrast */
+        }
+
+        .card-profile .card-tagline {
+            color: var(--color-light-grey);
+        }
+
+        .card-profile .accent-text {
+            color: #ffc107; /* Bright yellow/gold for contrast on a dark background */
+        }
+        /* End Profile Card Overrides */
+
 
         /* Card 2 (Location): Small box (1x1) */
         .card-location {
             grid-column: span 1;
-        }
-
-        /* Card 3 (Tech Stack): Medium box (1x2) */
-        .card-tech {
-            grid-column: span 1;
-            grid-row: span 2;
-        }
-
-        /* Card 4 (Case Study): Medium box (2x1) */
-        .card-case-study {
-            grid-column: span 2;
         }
 
         /* Card 5 (Hobby): Small box (1x1) */
@@ -153,9 +182,25 @@
             grid-column: span 1;
         }
 
+        /* Card 7 (Reflection) - Takes up 2 columns below location/hobby */
+        .card-reflection {
+            grid-column: span 2;
+        }
+
+        /* Card 3 (Tech Stack): Medium box (1x2) */
+        .card-tech {
+            grid-column: 3;
+            grid-row: span 2;
+        }
+        
+        /* Card 4 (Case Study): Medium box (2x1) */
+        .card-case-study {
+            grid-column: span 2;
+        }
+
         /* Card 6 (Playlist): Wide box at the bottom (4x1) - Spans all columns */
         .card-playlist {
-            grid-column: 1 / -1; /* Start at column 1, end at the last column line */
+            grid-column: 1 / -1; 
             min-height: 80px;
             justify-content: center;
             align-items: center;
@@ -175,13 +220,10 @@
         /* Responsive Design: Mobile Layout (Stacked Vertically) */
         @media (max-width: 768px) {
             .bento-grid-container {
-                /* Single column layout for mobile */
                 grid-template-columns: 1fr;
-                /* Remove specific grid spans for mobile to make them stack */
                 grid-auto-rows: minmax(100px, auto);
             }
 
-            /* Reset all card spans to stack vertically */
             .bento-card {
                 grid-column: auto !important;
                 grid-row: auto !important;
@@ -190,10 +232,14 @@
             .card-profile {
                 min-height: 250px;
             }
+            
+            .card-location { order: 2; }
+            .card-hobby { order: 3; }
+            .card-reflection { order: 4; }
+            .card-tech { order: 5; }
+            .card-case-study { order: 6; }
+            .card-playlist { order: 7; }
 
-            .card-playlist {
-                min-height: 100px;
-            }
 
             .card-title {
                 font-size: 1.3rem;
@@ -223,22 +269,34 @@
             <div>
                 <h1 class="card-title">WONG SHI YIN</h1>
                 <p>Program: <span class="accent-text">B.Sc. Food Science</span></p>
-                <p>Year: <span class="accent-text">Year 1 (Semester 2)</span></p>
+                <p>Year: <span class="accent-text">Year 1 (Semester 1)</span></p>
                 <p class="card-tagline">'Innovating food safety.'</p>
             </div>
             <div class="social-links">
-                <a href="#">LinkedIn</a>
-                <a href="#">GitHub</a>
-                <a href="#">UMT Portal</a>
+                <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+                <a href="https://github.com/s80451" target="_blank">GitHub</a>
+                <a href="#" target="_blank">UMT Portal</a>
             </div>
         </section>
 
+        <section class="bento-card card-tech">
+            <div class="card-header">Core Competencies & Tools</div>
+            <div class="card-body">
+                <p><span class="accent-text">1. Food Chemistry</span> (Foundational)</p>
+                <p><span class="accent-text">2. Food Microbiology</span> (Lab Techniques)</p>
+                <p>3. Data Analysis</p>
+                <p>4. Lab Analysis</p>
+                <p>5. Hazard Analysis ($\text{HACCP}$ Principles)</p>
+                <p>6. Technical Report Writing</p>
+            </div>
+        </section>
+        
         <section class="bento-card card-location">
             <div class="small-card-content">
                 <div class="card-header">Current Location</div>
                 <div class="small-title">UMT Campus</div>
                 <p>Area: <span class="accent-text">Kuala Nerus, Terengganu</span></p>
-                <p>Local Time: 2:51 PM (+08)</p>
+                <p>Local Time: 3:00 PM (+08)</p>
             </div>
         </section>
 
@@ -251,15 +309,10 @@
             </div>
         </section>
 
-        <section class="bento-card card-tech">
-            <div class="card-header">Core Competencies & Tools</div>
-            <div class="card-body">
-                <p><span class="accent-text">1. Food Chemistry</span> (Foundational)</p>
-                <p><span class="accent-text">2. Food Microbiology</span> (Lab Techniques)</p>
-                <p>3. Advanced $\text{Excel}$ (Data Analysis)</p>
-                <p>4. $\text{Lab Analysis}$ ($\text{UV-Vis}$ Spectroscopy)</p>
-                <p>5. Hazard Analysis ($\text{HACCP}$ Principles)</p>
-                <p>6. Technical Report Writing</p>
+        <section class="bento-card card-reflection">
+            <div class="card-header">Why Food Tech Matters in Malaysia</div>
+            <div class="large-text-content">
+                <p>Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.</p>
             </div>
         </section>
 
