@@ -12,7 +12,6 @@
             --color-light-grey: #f8f9fa;
             --color-mid-grey: #e9ecef;
             --color-dark-grey: #495057;
-            /* New Accent Color: Deep Ocean Blue (#0056b3) - matches UMT/scientific theme */
             --color-accent: #0056b3; 
             --font-family: 'Inter', sans-serif;
             --border-radius: 12px;
@@ -37,37 +36,32 @@
             padding: var(--padding);
         }
 
-        /* Bento Grid Container */
         .bento-grid-container {
             width: 100%;
-            max-width: 1200px; /* Max width for desktop grid */
+            max-width: 1200px;
             display: grid;
             gap: var(--gap);
-            /* Define 4 equal columns for desktop layout */
             grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: minmax(150px, auto); /* Consistent minimum row height */
+            grid-auto-rows: minmax(150px, auto);
         }
 
-        /* Bento Grid Card Styling */
         .bento-card {
             background-color: var(--color-white);
             border: 1px solid var(--color-mid-grey);
             border-radius: var(--border-radius);
             padding: var(--padding);
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.2s ease-in-out; /* Smooth hover transition */
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.2s ease-in-out;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             overflow: hidden;
         }
 
-        /* Theme Tweak 3: Subtle zoom/scale on hover */
         .bento-card:hover {
-            transform: scale(1.01); /* Subtle 1% zoom */
+            transform: scale(1.01);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
         }
 
-        /* Card Headings and Typography */
         .card-header {
             font-size: 0.85rem;
             font-weight: 700;
@@ -95,7 +89,6 @@
             margin-bottom: 4px;
         }
 
-        /* Accent Text for emphasis */
         .accent-text {
             color: var(--color-accent);
             font-weight: 600;
@@ -106,13 +99,11 @@
             font-weight: 600;
         }
         
-        /* Utility for the reflection card */
         .large-text-content {
             font-size: 1.05rem;
             line-height: 1.5;
         }
 
-        /* Social Links Styling */
         .social-links {
             margin-top: 15px;
             display: flex;
@@ -131,74 +122,72 @@
             color: var(--color-accent);
         }
 
-        /* Specific Card Grid Spans (Desktop Layout) */
-
-        /* Card 1 (Profile): Large box (2x2) */
+        /* Profile Card */
         .card-profile {
             grid-column: span 2;
             grid-row: span 2;
-            
-            /* ---- BACKGROUND IMAGE STYLES RE-APPLIED ---- */
-            /* NOTE: This assumes 'bg.jpg' is in the same directory */
             background-image: url('bg.jpg'); 
             background-size: cover;          
             background-position: center;     
             background-repeat: no-repeat;    
             background-blend-mode: multiply; 
-            background-color: rgba(0, 0, 0, 0.35); /* Increased opacity for better text contrast */
-            color: var(--color-white); /* Main text color set to white */
-            /* -------------------------------- */
+            background-color: rgba(0, 0, 0, 0.35);
+            color: var(--color-white);
         }
         
-        /* Profile Card Text Overrides for Readability */
-        .card-profile .card-header {
-            color: var(--color-light-grey); 
-        }
+        .card-profile .card-header { color: var(--color-light-grey); }
+        .card-profile .social-links a { color: var(--color-light-grey); }
+        .card-profile .social-links a:hover { color: #00bcd4; }
+        .card-profile .card-tagline { color: var(--color-light-grey); }
+        .card-profile .accent-text { color: #ffc107; }
 
-        .card-profile .social-links a {
-            color: var(--color-light-grey);
-        }
-        .card-profile .social-links a:hover {
-            color: #00bcd4; /* A slight blue/cyan hover accent for contrast */
-        }
-
-        .card-profile .card-tagline {
-            color: var(--color-light-grey);
-        }
-
-        .card-profile .accent-text {
-            color: #ffc107; /* Bright yellow/gold for contrast on a dark background */
-        }
-        /* End Profile Card Overrides */
-
-
-        /* Card 2 (Location): Small box (1x1) */
-        .card-location {
-            grid-column: span 1;
-        }
-
-        /* Card 5 (Hobby): Small box (1x1) */
-        .card-hobby {
-            grid-column: span 1;
-        }
-
-        /* Card 7 (Reflection) - Takes up 2 columns below location/hobby */
-        .card-reflection {
-            grid-column: span 2;
-        }
-
-        /* Card 3 (Tech Stack): Medium box (1x2) */
-        .card-tech {
-            grid-column: 3;
-            grid-row: span 2;
-        }
+        .card-location { grid-column: span 1; }
+        .card-hobby { grid-column: span 1; }
+        .card-reflection { grid-column: span 2; }
+        .card-tech { grid-column: 3; grid-row: span 2; }
         
-        /* Card 4 (Case Study): Medium box (2x1) */
+        /* Case Study Card with Internal Columns */
         .card-case-study {
             grid-column: span 2;
+            flex-direction: row; /* Horizontal layout for desktop */
+            align-items: center;
+            gap: 20px;
         }
 
-        /* Card 6 (Playlist): Wide box at the bottom (4x1) - Spans all columns */
+        .case-study-main {
+            flex: 2; /* Takes up more space */
+        }
+
+        .case-study-action {
+            flex: 1; /* Column for the button */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Lab Timer Button Styling */
+        .btn-lab-app {
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 86, 179, 0.2);
+            border: 2px solid transparent;
+        }
+
+        .btn-lab-app:hover {
+            background-color: var(--color-white);
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 86, 179, 0.3);
+        }
+
         .card-playlist {
             grid-column: 1 / -1; 
             min-height: 80px;
@@ -207,7 +196,6 @@
             text-align: center;
         }
 
-        /* Utility for small cards to align content vertically */
         .small-card-content {
             display: flex;
             flex-direction: column;
@@ -216,12 +204,10 @@
             height: 100%;
         }
 
-
-        /* Responsive Design: Mobile Layout (Stacked Vertically) */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .bento-grid-container {
                 grid-template-columns: 1fr;
-                grid-auto-rows: minmax(100px, auto);
             }
 
             .bento-card {
@@ -229,34 +215,22 @@
                 grid-row: auto !important;
             }
 
-            .card-profile {
-                min-height: 250px;
-            }
-            
-            .card-location { order: 2; }
-            .card-hobby { order: 3; }
-            .card-reflection { order: 4; }
-            .card-tech { order: 5; }
-            .card-case-study { order: 6; }
-            .card-playlist { order: 7; }
-
-
-            .card-title {
-                font-size: 1.3rem;
-            }
-            
-            .card-header {
-                font-size: 0.75rem;
+            .card-case-study {
+                flex-direction: column; /* Stack on mobile */
+                text-align: center;
             }
 
-            body {
-                padding: 15px;
+            .case-study-action {
+                margin-top: 10px;
+                width: 100%;
             }
-            
-            :root {
-                --padding: 20px;
-                --gap: 12px;
+
+            .btn-lab-app {
+                width: 100%;
             }
+
+            body { padding: 15px; }
+            :root { --padding: 20px; --gap: 12px; }
         }
     </style>
 </head>
@@ -317,10 +291,15 @@
         </section>
 
         <section class="bento-card card-case-study">
-            <div class="card-header">Active Research/Case Study</div>
-            <div class="card-title">Starch Gelatinization in Local Kuih</div>
-            <p>Description: Analyzing the texture profiles, moisture content, and gelatinization temperature of Kuih Lapis using thermal analysis to optimize ingredient ratios and shelf stability.</p>
-            <p>Status: <span class="accent-text">Data Collection Phase</span>.</p>
+            <div class="case-study-main">
+                <div class="card-header">Active Research/Case Study</div>
+                <div class="card-title">Starch Gelatinization in Local Kuih</div>
+                <p>Analyzing the texture profiles, moisture content, and gelatinization temperature of Kuih Lapis to optimize shelf stability.</p>
+                <p style="margin-top: 5px;">Status: <span class="accent-text">Data Collection Phase</span>.</p>
+            </div>
+            <div class="case-study-action">
+                <a href="https://s80451.github.io/lab-timer-app/app.html" target="_blank" class="btn-lab-app">Try My Lab Timer App</a>
+            </div>
         </section>
 
         <section class="bento-card card-playlist">
@@ -331,5 +310,4 @@
     </main>
     
 </body>
-
 </html>
